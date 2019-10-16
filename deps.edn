@@ -2,18 +2,21 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.1"}
         ring/ring-defaults {:mvn/version "0.3.2"}
         compojure {:mvn/version "1.6.1"}
-        org.clojure/test.check {:mvn/version "0.10.0"}
-        com.velisco/strgen {:mvn/version "0.1.8"}
-        criterium {:mvn/version "0.4.5"}
         ring {:mvn/version "1.7.1"}
-        ring/ring-mock {:mvn/version "0.4.0"}
-        instaparse {:mvn/version "1.4.10"}
+        com.velisco/strgen {:mvn/version "0.1.8"}
+        clj-time {:mvn/version "0.15.2"}
+        ring/ring-json {:mvn/version "0.5.0"}
         ring-json-response {:mvn/version "0.2.0"}
-        clj-time {:mvn/version "0.15.2"}}
+        cheshire {:mvn/version "5.9.0"}}
  :aliases
  {:test {:extra-paths ["test"]
          :extra-deps {org.clojure/test.check {:mvn/version "0.10.0"}
-                      javax.servlet/servlet-api {:mvn/version "2.5"}}}
+                      javax.servlet/servlet-api {:mvn/version "2.5"}
+                      ring/ring-mock {:mvn/version "0.4.0"}
+                      instaparse {:mvn/version "1.4.10"}
+                      http-kit {:mvn/version "2.4.0-alpha4"}}}
+  :dev {:extra-paths ["dev"]
+        :extra-deps {criterium {:mvn/version "0.4.5"}}}
   :runner
   {:extra-deps {com.cognitect/test-runner
                 {:git/url "https://github.com/cognitect-labs/test-runner"

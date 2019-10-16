@@ -8,7 +8,7 @@
   [string]
   (s/valid? ::sspecs/allowed-str string))
 
-(def validation-failure-text "Not a valid input - Input values should only contain lower case characters, without any numbers or special characters.")
+(def validation-failure-text "Not a valid input - Input values can not be blank, and only contain lower case characters, without any numbers or special characters.")
 
 (defn scramble?
   [string word]

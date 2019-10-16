@@ -2,22 +2,14 @@
   (:require [adgoji.scramble.handlers :refer [scramble? validation-failure-text]]
             [clojure.test :refer [testing is deftest]]))
 
-(def true-result {:status 200,
-                  :headers {"Content-Type" "application/json"},
-                  :body "{\"result\":true}"})
+(def true-result "{\"result\":true}")
 
-(def false-result {:status 200,
-                   :headers {"Content-Type" "application/json"},
-                   :body "{\"result\":false}"})
-
-(def failure-result {:status 400,
-                     :headers {"Content-Type" "application/json"},
-                     :body "{\"reason\":\"Not a valid input - Input values should only contain lower case characters, without any numbers or special characters.\"}"})
+(def false-result "{\"result\":false}")
 
 (deftest app-test
   (testing "true response"
-    (is (= true-result (scramble? "hello" "he"))))
+    (is (= true-result (:body (scramble? "hello" "he")))))
   (testing "false response"
-    (is (= false-result (scramble? "hello" "hi"))))
+    (is (= false-result (:body (scramble? "hello" "hi")))))
   (testing "validation failure"
-    (is (= failure-result (scramble? "hello" ";")))))
+    (is (= 400 (:status (scramble? "hello" ";"))))))

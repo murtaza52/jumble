@@ -1,13 +1,15 @@
 (ns adgoji.scramble.app-test
-  "The below test checks if the middlewares are configured correctly."
+  "The below tests checks if the middlewares are configured correctly."
   (:require [adgoji.scramble.app :refer [app]]
             [clojure.test :refer [testing is deftest]]
-            [ring.mock.request :refer [request]]))
+            [ring.mock.request :refer [json-body request]]))
 
-(def response {:status 200,
-               :headers {"Content-Type" "application/json"},
-               :body "{\"result\":true}"})
+(def headers {"Content-Type" "application/json"})
 
 (deftest app-test
-  (testing "middlwares are working correctly"
-    (is (= response (app (request :post "/scramble" {:string "abc" :word "ab"}))))))
+  (testing "middlewares are working correctly"
+    (let [request (-> (request :post "/scramble")
+                      (json-body {:string "abc" :word "ab"}))
+          response (app request)]
+      (is (= headers (:headers response))
+          (= 200 (:status response))))))

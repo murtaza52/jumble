@@ -1,11 +1,16 @@
 (ns adgoji.scramble.app
-  (:require [ring.adapter.jetty :refer [run-jetty]]
-            [adgoji.scramble.routes :refer [app-routes]]
-            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]))
+  (:require [adgoji.scramble.routes :refer [all-routes]]
+            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+            [ring.middleware.json :refer [wrap-json-params]]
+            [clojure.pprint :refer [pprint]]))
+
+(defn wrap-debug
+  [handler]
+  (fn [request]
+    (pprint request)
+    (handler request)))
 
 (def app
-  (wrap-defaults app-routes api-defaults))
-
-(defn run-app
-  []
-  (run-jetty app {:port 3000}))
+  (-> all-routes
+      (wrap-defaults api-defaults)
+      wrap-json-params))
