@@ -5,7 +5,7 @@
 
 (defn char-occurrence
   "Returns the number of occurrence for the given `character` in the given `string`.
-  Both `character` and `string` are of string type."
+  Both `character` and `string` are of type string."
   [string character]
   {:pre [(re-matches #"[a-z]" character)]}
   (count

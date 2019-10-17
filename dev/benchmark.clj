@@ -41,7 +41,7 @@
 
   ;; Execution time mean : 36.451856 ms
 
-  
+
 ;;;; includes-every-char? ;;;;
 
   (bench (includes-every-multiple-char? (gen-data 2000) (gen-data 1000)))

@@ -4,13 +4,13 @@
             [reagent.core :as r]))
 
 (defn submit-button
-  [app-state state]
+  [app-state local-state]
   [:a.btn.btn-primary {:href "#"
-                       :class (when (not (l/can-submit? state)) "disabled")
+                       :class (when (not (l/can-submit? local-state)) "disabled")
                        :role "button"
-                       :aria-disabled (if (l/can-submit? state) false true)
-                       :on-click #(scramble (get-in @state [:string :text])
-                                            (get-in @state [:word :text])
+                       :aria-disabled (if (l/can-submit? local-state) false true)
+                       :on-click #(scramble (get-in @local-state [:string :text])
+                                            (get-in @local-state [:word :text])
                                             app-state)}
    "Scramble"])
 
@@ -31,10 +31,12 @@
   [state]
   [:div.alert {:class (l/get-alert-box-class state) :role "alert"} (l/get-alert-box-text state)])
 
+(def initial-form-state {:string {:text "" :valid? false :to-validate? false}
+                         :word {:text "" :valid? false :to-validate? false}})
+
 (defn scramble-form
   [app-state]
-  (let [local-state (r/atom {:string {:text "" :valid? false :to-validate? false}
-                             :word {:text "" :valid? false :to-validate? false}})]
+  (let [local-state (r/atom initial-form-state)]
     (fn []
       [:div.jumbotron.d-flex.align-items-center.justify-content-center
        [:div.container
@@ -52,4 +54,4 @@
                       :k :word
                       :app-state app-state}]
            [result-box app-state]
-           [submit-button local-state]]]]]])))
+           [submit-button app-state local-state]]]]]])))
