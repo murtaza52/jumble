@@ -4,13 +4,14 @@
             [reagent.core :as r]))
 
 (defn submit-button
-  [state]
+  [app-state state]
   [:a.btn.btn-primary {:href "#"
                        :class (when (not (l/can-submit? state)) "disabled")
                        :role "button"
                        :aria-disabled (if (l/can-submit? state) false true)
                        :on-click #(scramble (get-in @state [:string :text])
-                                            (get-in @state [:word :text]))}
+                                            (get-in @state [:word :text])
+                                            app-state)}
    "Scramble"])
 
 (defn text-box

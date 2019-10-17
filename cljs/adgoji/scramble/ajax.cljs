@@ -1,27 +1,14 @@
 (ns adgoji.scramble.ajax
   (:require [ajax.core :refer [POST]]
-            [adgoji.scramble.state :refer [app-state]]))
+            [adgoji.scramble.response-handlers :refer [response-handler error-handler]]))
 
 (def server-uri "http://localhost:3000/scramble")
 
-(defn response-handler
-  [{:strs [result]}]
-  (swap! app-state dissoc :error)
-  (swap! app-state assoc :scramble? result))
-
-(defn error-handler
-  [{:keys [response]}]
-  (swap! app-state dissoc :scramble?)
-  (if response
-    (swap! app-state assoc :error (response "reason"))
-    (swap! app-state assoc :error "Server Error - Please Contact Adgoji !")))
-
 (defn scramble
-  [string word]
-  (println string word)
+  [string word app-state]
   (POST server-uri
         {:format :json
          :params {:string string
                   :word word}
-         :handler response-handler
-         :error-handler error-handler}))
+         :handler (partial response-handler app-state)
+         :error-handler (partial error-handler app-state)}))

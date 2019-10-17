@@ -18,7 +18,7 @@
 (defn update-text
   [e k state app-state]
   (let [v (get-value e)]
-    (reset! app-state {})
+    (swap! app-state dissoc :scramble? :error)
     (swap! state assoc-in [k :text] v)
     (swap! state assoc-in [k :valid?] (validate v))
     (swap! state assoc-in [k :to-validate?] true)))
@@ -50,5 +50,3 @@
     (true? (:scramble? @state)) "Bravo ! The scrambled string contains the word !!"
     (false? (:scramble? @state)) "Nice try, however the scrambled string does not contain the word."
     :else "ReSuLt - SuBmIt To ScRaMbLe AnD ChEcK"))
-
-
