@@ -1,42 +1,19 @@
 # scramble
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+It scrambles the given string and checks if it can be rearranged to match the given word. 
 
 ## Usage
 
-FIXME: explanation
+Clone the repository and run the project:
 
-Run the project directly:
+    $ clj -m adgoji.scramble.main
 
-    $ clj -m adgoji.scramble
+This will start the server on port 3000. Connect with your browser on http://localhost:3000/. This will serve the application. (The compiled cljs (not minified) is included in the repo for ease of running the application.)
 
-Run the project's tests (they'll fail until you edit them):
+To run the clj tests - 
 
     $ clj -A:test:runner
 
-## Options
+To run the cljs tests - 
 
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2019 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+    $ shadow-cljs compile test
