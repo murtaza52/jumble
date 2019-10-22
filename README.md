@@ -17,3 +17,5 @@ To run the clj tests -
 To run the cljs tests - 
 
     $ shadow-cljs compile test
+    
+The benchmarks are under dev/benchmarks.clj and generative tests in models_test.clj
