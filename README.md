@@ -1,4 +1,4 @@
-# scramble
+# jumble
 
 It scrambles the given string and checks if it can be rearranged to match the given word. 
 
